@@ -126,11 +126,11 @@ td.d{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
 .sponsor b{font-family:var(--display);font-size:1.3rem}
 .sponsor span{color:var(--muted);font-size:.9rem}
 .years{display:grid;gap:28px;max-width:760px}
-.year{display:grid;grid-template-columns:80px 1fr;gap:18px}
-.year h3{font-size:1.4rem;color:var(--ink);border-top:4px solid var(--yellow);padding-top:10px;align-self:start}
+.year{display:grid;grid-template-columns:140px 1fr;gap:18px}
+.year h3{font-size:1.2rem;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink);border-top:4px solid var(--yellow);padding-top:10px;align-self:start}
 @media (max-width:620px){.year{grid-template-columns:1fr;gap:8px}}
 .news{list-style:none;margin:0;padding:0;display:grid;max-width:760px}
-.news li{display:grid;grid-template-columns:64px 1fr;gap:18px;padding-block:14px;border-bottom:1px solid var(--line)}
+.news li{display:grid;grid-template-columns:96px 1fr;gap:18px;padding-block:14px;border-bottom:1px solid var(--line)}
 .news li:first-child{padding-top:0}
 .news time{font-family:var(--mono);font-size:.85rem;font-variant-numeric:tabular-nums;color:var(--muted);padding-top:2px}
 .years .year:first-child .news time{color:var(--ink);font-weight:500;box-shadow:inset 0 -6px 0 var(--yellow);justify-self:start;align-self:start}
@@ -265,77 +265,72 @@ html{scroll-behavior:smooth}
     <p class="eyebrow">News</p>
     <h2 id="news-h">What's been happening</h2>
     <div class="years">
-      <div class="year"><h3>2026</h3>
+      <div class="year"><h3>2026 – 2027</h3>
         <ol class="news">
-          <li><time datetime="2026-09-24">24 Sep</time><div><b>Room booked for the kick-off</b><p>The CeNT UW lecture hall is reserved for Wednesday 14 October 2026, 15:00–17:00: lab flash talks, then pizza.</p></div></li>
-          <li><time datetime="2026-09-22">22 Sep</time><div><b>RNA Club Warsaw is back</b><p>Group leaders across Ochota Campus are invited to relaunch the club for its 10th anniversary. A new Slack workspace and WhatsApp group open.</p></div></li>
+          <li><time datetime="2026-09-24">24 Sep 2026</time><div><b>Room booked for the kick-off</b><p>The CeNT UW lecture hall is reserved for Wednesday 14 October 2026, 15:00–17:00: lab flash talks, then pizza.</p></div></li>
+          <li><time datetime="2026-09-22">22 Sep 2026</time><div><b>RNA Club Warsaw is back</b><p>Group leaders across Ochota Campus are invited to relaunch the club for its 10th anniversary. A new Slack workspace and WhatsApp group open.</p></div></li>
         </ol>
       </div>
-      <div class="year"><h3>2025</h3>
+      <div class="year"><h3>2023 – 2024</h3>
         <ol class="news">
-          <li><time datetime="2025-09-18">18 Sep</time><div><b>Online RNA structure session</b><p>An online meeting on RNA structure, linked to the CASP RNA SIG.</p></div></li>
+          <li><time datetime="2024-04-23">23 Apr 2024</time><div><b>Eric Westhof (Strasbourg) returns</b><p>“From geometric recognition in the ribosome to tRNA modifications and human diseases”, followed by a career session for PhD students and postdocs. IIMCB, room 003.</p></div></li>
+          <li><time datetime="2023-12-05">5 Dec 2023</time><div><b>Szymon Świeżewski (IBB) and Paweł Mikulski (IMol)</b><p>Two talks: “lncRNA landscape of DOG1” and “Remember &amp; Forget: chromatin-based mechanisms of transcriptional memory”. IIMCB, room 003.</p></div></li>
+          <li><time datetime="2023-10-24">24 Oct 2023</time><div><b>Agata Starosta (IBB)</b><p>“The translatome of the Bacillus spore”. IIMCB, room 003.</p></div></li>
+          <li><time datetime="2023-09-05">5 Sep 2023</time><div><b>Ewelina Małecka-Grajek (IIMCB)</b><p>“Choreography of RNA–protein interaction for gene regulation”.</p></div></li>
         </ol>
       </div>
-      <div class="year"><h3>2024</h3>
+      <div class="year"><h3>2022 – 2023</h3>
         <ol class="news">
-          <li><time datetime="2024-04-23">23 Apr</time><div><b>Eric Westhof (Strasbourg) returns</b><p>“From geometric recognition in the ribosome to tRNA modifications and human diseases”, followed by a career session for PhD students and postdocs. IIMCB, room 003.</p></div></li>
+          <li><time datetime="2023-07-11">11 Jul 2023</time><div><b>Back in person: Summer Edition</b><p>Gracjan Michlewski (IIMCB): “Regulation of RIG-I/IFN signalling by RNA-binding proteins”, then pizza. The first in-person RCW since 2019.</p></div></li>
+          <li><time datetime="2023-05-23">23 May 2023</time><div><b>CASP RNA SIG launches</b><p>The first talk of the RNA structure special interest group co-founded by Marcin Magnus and Rachael Kretsch: Yu Li on RNA structure prediction with deep learning.</p></div></li>
         </ol>
       </div>
-      <div class="year"><h3>2023</h3>
+      <div class="year"><h3>2021 – 2022</h3>
         <ol class="news">
-          <li><time datetime="2023-12-05">5 Dec</time><div><b>Szymon Świeżewski (IBB) and Paweł Mikulski (IMol)</b><p>Two talks: “lncRNA landscape of DOG1” and “Remember &amp; Forget: chromatin-based mechanisms of transcriptional memory”. IIMCB, room 003.</p></div></li>
-          <li><time datetime="2023-10-24">24 Oct</time><div><b>Agata Starosta (IBB)</b><p>“The translatome of the Bacillus spore”. IIMCB, room 003.</p></div></li>
-          <li><time datetime="2023-09-05">5 Sep</time><div><b>Ewelina Małecka-Grajek (IIMCB)</b><p>“Choreography of RNA–protein interaction for gene regulation”.</p></div></li>
-          <li><time datetime="2023-07-11">11 Jul</time><div><b>Back in person: Summer Edition</b><p>Gracjan Michlewski (IIMCB): “Regulation of RIG-I/IFN signalling by RNA-binding proteins”, then pizza. The first in-person RCW since 2019.</p></div></li>
-          <li><time datetime="2023-05-23">23 May</time><div><b>CASP RNA SIG launches</b><p>The first talk of the RNA structure special interest group co-founded by Marcin Magnus and Rachael Kretsch: Yu Li on RNA structure prediction with deep learning.</p></div></li>
+          <li><time datetime="2022-06-07">7 Jun 2022</time><div><b>Magdalena Dziembowska and Rafał Szabla</b><p>“Synaptic translation of mitochondrial proteins” (CeNT UW) and “Shedding UV light on the origins of RNA” (Wrocław University of Science and Technology). Online.</p></div></li>
+          <li><time datetime="2022-04-12">12 Apr 2022</time><div><b>Ana Fiszbein (Boston University)</b><p>The evolution of hybrid exons. Online.</p></div></li>
+          <li><time datetime="2022-02-08">8 Feb 2022</time><div><b>Paweł Grzechnik and Maciej Cieśla</b><p>“Nascent transcriptome: a hidden signature of gene expression” (Birmingham) and “Beyond the post-genomic era: pre-mRNA splicing in cancer” (IMol). Online.</p></div></li>
+          <li><time datetime="2022-01-11">11 Jan 2022</time><div><b>Agnieszka Tudek (IBB)</b><p>RNA quality control and degradation in budding yeast. Online.</p></div></li>
+          <li><time datetime="2021-12-07">7 Dec 2021</time><div><b>Relaunch with David Bartel</b><p>Keynote “Regulation of mRNA translation and decay” (Whitehead/MIT/HHMI), plus short talks from new Ochota RNA groups: Michlewski, Starosta, Bandyra and Turowski. Online.</p></div></li>
+          <li><time datetime="2021-11-09">9 Nov 2021</time><div><b>RNA Club Warsaw is back for 2021/22</b><p>With support from the RNA Society and Lexogen, the club restarts with monthly online seminars, organised by a new team led by Vladyslava Liudkovska.</p></div></li>
         </ol>
       </div>
-      <div class="year"><h3>2022</h3>
+      <div class="year"><h3>2019 – 2020</h3>
         <ol class="news">
-          <li><time datetime="2022-06-07">7 Jun</time><div><b>Magdalena Dziembowska and Rafał Szabla</b><p>“Synaptic translation of mitochondrial proteins” (CeNT UW) and “Shedding UV light on the origins of RNA” (Wrocław University of Science and Technology). Online.</p></div></li>
-          <li><time datetime="2022-04-12">12 Apr</time><div><b>Ana Fiszbein (Boston University)</b><p>The evolution of hybrid exons. Online.</p></div></li>
-          <li><time datetime="2022-02-08">8 Feb</time><div><b>Paweł Grzechnik and Maciej Cieśla</b><p>“Nascent transcriptome: a hidden signature of gene expression” (Birmingham) and “Beyond the post-genomic era: pre-mRNA splicing in cancer” (IMol). Online.</p></div></li>
-          <li><time datetime="2022-01-11">11 Jan</time><div><b>Agnieszka Tudek (IBB)</b><p>RNA quality control and degradation in budding yeast. Online.</p></div></li>
+          <li><time datetime="2019-09-02">2 Sep 2019</time><div><b>Call for a new organising team</b><p>After three years and more than twenty events, lectures and workshops, the founding team looks for successors.</p></div></li>
         </ol>
       </div>
-      <div class="year"><h3>2021</h3>
+      <div class="year"><h3>2018 – 2019</h3>
         <ol class="news">
-          <li><time datetime="2021-12-07">7 Dec</time><div><b>Relaunch with David Bartel</b><p>Keynote “Regulation of mRNA translation and decay” (Whitehead/MIT/HHMI), plus short talks from new Ochota RNA groups: Michlewski, Starosta, Bandyra and Turowski. Online.</p></div></li>
-          <li><time datetime="2021-11-09">9 Nov</time><div><b>RNA Club Warsaw is back for 2021/22</b><p>With support from the RNA Society and Lexogen, the club restarts with monthly online seminars, organised by a new team led by Vladyslava Liudkovska.</p></div></li>
+          <li><time datetime="2019-06-17">17 Jun 2019</time><div><b>Matthew Disney (Scripps)</b><p>An IIMCB seminar, “Translating RNA Sequence into Lead Small Molecule Medicines”, followed by an RNA Club / Do Science! evening with career advice.</p></div></li>
+          <li><time datetime="2019-06-10">10 Jun 2019</time><div><b>Keynote: Rhiju Das (Stanford)</b><p>Two talks: computer modelling and design of 3D RNA structure, and RNA technologies developed through the Eterna online game.</p></div></li>
+          <li><time datetime="2019-06-04">4 Jun 2019</time><div><b>Test talks before RNA 2019</b><p>Speakers heading to the RNA Society meeting in Kraków rehearse and get feedback: Konarska, Dziembowski, Świeżewski and Bujnicki labs.</p></div></li>
+          <li><time datetime="2019-05-06">6 May 2019</time><div><b>R and Python workshop with #NGSchool</b><p>A hands-on introduction to programming for biologists.</p></div></li>
+          <li><time datetime="2019-02-07">7 Feb 2019</time><div><b>Meeting I 2018/19 at IIMCB</b><p>Hosted by IIMCB director prof. Marta Miączyńska.</p></div></li>
+          <li><time datetime="2018-12-07">7 Dec 2018</time><div><b>RNA-Puzzles open session</b><p>Talks by Jiří Šponer, Samuela Pasquali and Petr Šulc at IIMCB.</p></div></li>
+          <li><time datetime="2018-09-30">30 Sep 2018</time><div><b>RNA Salon funding renewed</b><p>The RNA Society approves RNA Salon funding for 2018/19, with Lexogen as co-sponsor.</p></div></li>
         </ol>
       </div>
-      <div class="year"><h3>2019</h3>
+      <div class="year"><h3>2017 – 2018</h3>
         <ol class="news">
-          <li><time datetime="2019-09-02">2 Sep</time><div><b>Call for a new organising team</b><p>After three years and more than twenty events, lectures and workshops, the founding team looks for successors.</p></div></li>
-          <li><time datetime="2019-06-17">17 Jun</time><div><b>Matthew Disney (Scripps)</b><p>An IIMCB seminar, “Translating RNA Sequence into Lead Small Molecule Medicines”, followed by an RNA Club / Do Science! evening with career advice.</p></div></li>
-          <li><time datetime="2019-06-10">10 Jun</time><div><b>Keynote: Rhiju Das (Stanford)</b><p>Two talks: computer modelling and design of 3D RNA structure, and RNA technologies developed through the Eterna online game.</p></div></li>
-          <li><time datetime="2019-06-04">4 Jun</time><div><b>Test talks before RNA 2019</b><p>Speakers heading to the RNA Society meeting in Kraków rehearse and get feedback: Konarska, Dziembowski, Świeżewski and Bujnicki labs.</p></div></li>
-          <li><time datetime="2019-05-06">6 May</time><div><b>R and Python workshop with #NGSchool</b><p>A hands-on introduction to programming for biologists.</p></div></li>
-          <li><time datetime="2019-02-07">7 Feb</time><div><b>Meeting I 2018/19 at IIMCB</b><p>Hosted by IIMCB director prof. Marta Miączyńska.</p></div></li>
+          <li><time datetime="2018-05-24">24 May 2018</time><div><b>Meeting III: Symposium</b><p>The third meeting of the 2017/18 season.</p></div></li>
+          <li><time datetime="2018-04-17">17 Apr 2018</time><div><b>Meeting at IIMCB</b><p>Short talks by junior researchers from the Kufel, Bujnicki and Kaczmarek labs.</p></div></li>
+          <li><time datetime="2018-03-08">8 Mar 2018</time><div><b>#NGSchool workshops</b><p>A series of hands-on workshops with NGSchool, including genome and transcriptome assembly, ChIP-seq and RNA-seq analysis.</p></div></li>
+          <li><time datetime="2018-01-22">22 Jan 2018</time><div><b>First meeting of 2017/18</b><p>The club opens its second season.</p></div></li>
+          <li><time datetime="2017-10-05">5 Oct 2017</time><div><b>Keynote 2017: Eric Westhof</b><p>The first RNA Club Warsaw keynote lecture.</p></div></li>
         </ol>
       </div>
-      <div class="year"><h3>2018</h3>
+      <div class="year"><h3>2016 – 2017</h3>
         <ol class="news">
-          <li><time datetime="2018-12-07">7 Dec</time><div><b>RNA-Puzzles open session</b><p>Talks by Jiří Šponer, Samuela Pasquali and Petr Šulc at IIMCB.</p></div></li>
-          <li><time datetime="2018-09-30">30 Sep</time><div><b>RNA Salon funding renewed</b><p>The RNA Society approves RNA Salon funding for 2018/19, with Lexogen as co-sponsor.</p></div></li>
-          <li><time datetime="2018-05-24">24 May</time><div><b>Meeting III: Symposium</b><p>The third meeting of the 2017/18 season.</p></div></li>
-          <li><time datetime="2018-04-17">17 Apr</time><div><b>Meeting at IIMCB</b><p>Short talks by junior researchers from the Kufel, Bujnicki and Kaczmarek labs.</p></div></li>
-          <li><time datetime="2018-03-08">8 Mar</time><div><b>#NGSchool workshops</b><p>A series of hands-on workshops with NGSchool, including genome and transcriptome assembly, ChIP-seq and RNA-seq analysis.</p></div></li>
-          <li><time datetime="2018-01-22">22 Jan</time><div><b>First meeting of 2017/18</b><p>The club opens its second season.</p></div></li>
+          <li><time datetime="2017-05-25">25 May 2017</time><div><b>RNA Club III</b><p>The third meeting of the first season.</p></div></li>
+          <li><time datetime="2017-03-13">13 Mar 2017</time><div><b>RNA Club II at IBB</b><p>Held in IBB room E.</p></div></li>
+          <li><time datetime="2016-10-18">18 Oct 2016</time><div><b>First RNA Salon grant</b><p>The RNA Society's RNA Salon programme funds RNA Club Warsaw in its launch year.</p></div></li>
+          <li><time datetime="2016-10-17">17 Oct 2016</time><div><b>Wojciech Galej (MRC LMB) visits</b><p>An early RNA Club / Do Science! meeting.</p></div></li>
         </ol>
       </div>
-      <div class="year"><h3>2017</h3>
+      <div class="year"><h3>2015 – 2016</h3>
         <ol class="news">
-          <li><time datetime="2017-10-05">5 Oct</time><div><b>Keynote 2017: Eric Westhof</b><p>The first RNA Club Warsaw keynote lecture.</p></div></li>
-          <li><time datetime="2017-05-25">25 May</time><div><b>RNA Club III</b><p>The third meeting of the first season.</p></div></li>
-          <li><time datetime="2017-03-13">13 Mar</time><div><b>RNA Club II at IBB</b><p>Held in IBB room E.</p></div></li>
-        </ol>
-      </div>
-      <div class="year"><h3>2016</h3>
-        <ol class="news">
-          <li><time datetime="2016-10-18">18 Oct</time><div><b>First RNA Salon grant</b><p>The RNA Society's RNA Salon programme funds RNA Club Warsaw in its launch year.</p></div></li>
-          <li><time datetime="2016-10-17">17 Oct</time><div><b>Wojciech Galej (MRC LMB) visits</b><p>An early RNA Club / Do Science! meeting.</p></div></li>
-          <li><time datetime="2016-06-17">17 Jun</time><div><b>Kick-off meeting at IIMCB</b><p>The very first RNA Club Warsaw meeting, organised by Marcin Magnus as a spin-off of Do Science! and chaired by Szymon Świeżewski. Five short talks from the Bujnicki, Dziembowski, Świeżewski, Kufel and Malinowska labs, then a poster session with eight posters, supported by prof. Jacek Kuźnicki and IIMCB.</p></div></li>
+          <li><time datetime="2016-06-17">17 Jun 2016</time><div><b>Kick-off meeting at IIMCB</b><p>The very first RNA Club Warsaw meeting, organised by Marcin Magnus as a spin-off of Do Science! and chaired by Szymon Świeżewski. Five short talks from the Bujnicki, Dziembowski, Świeżewski, Kufel and Malinowska labs, then a poster session with eight posters, supported by prof. Jacek Kuźnicki and IIMCB.</p></div></li>
         </ol>
       </div>
     </div>
@@ -422,6 +417,7 @@ const LABS = [
   {inst:"IBB PAS", pi:"Agnieszka Tudek", lab:"Laboratory of RNA Processing and Decay", focus:"Poly(A)-tail control of nuclear and cytoplasmic mRNA decay; splicing regulation, in yeast and human cells.", url:"https://ibb.edu.pl/en/laboratory/dr-agnieszka-tudek/"},
   {inst:"IBB PAS", pi:"Agata Starosta", lab:"Laboratory of Translatomics", focus:"Ribosomes and translation in bacteria.", url:"https://ibb.edu.pl/en/laboratory/dr-hab-agata-starosta/"},
   {inst:"IBB PAS", pi:"Szymon Świeżewski", lab:"Laboratory of Seeds Molecular Biology", focus:"Non-coding RNA and transcriptional control of seed dormancy in plants.", url:"https://ibb.edu.pl/en/laboratory/szymon-swiezewski/"},
+  {inst:"IBB PAS", pi:"Jacek K. Nowak", lab:"Laboratory of Non-coding RNA and Genome Rearrangements", focus:"Developmentally regulated non-coding RNAs and their role in programmed genome rearrangements.", url:"https://ibb.edu.pl/en/laboratory/jacek-k-nowak/"},
   {inst:"IBB PAS", pi:"Tomasz Włodarski", lab:"Department of Bioinformatics", focus:"Co-translational folding of nascent proteins and the ribosomal exit tunnel.", url:"https://tomekwlodarski.com/"},
   {inst:"IMol PAS", pi:"Magda Konarska", lab:"Laboratory of RNA Biology", focus:"Mechanisms of the spliceosome and pre-mRNA splicing.", url:"https://imol.institute/leaders/konarska-group/"},
   {inst:"IMol PAS", pi:"Maciej Cieśla", lab:"Laboratory of Stem Cell RNA Metabolism", focus:"Pseudouridine-driven programmes and spliceosome regulation in stem cells and cancer.", url:"https://imol.institute/leaders/"},
