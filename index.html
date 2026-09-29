@@ -97,6 +97,13 @@ td.d{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
 .labs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
 .lab{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:8px;align-content:start}
 .lab:hover,.ch:hover{border-color:var(--yellow)}
+.tagbar{display:flex;flex-wrap:wrap;gap:6px}
+.tagchip{font:inherit;font-size:.8rem;border:1px solid var(--yellow);background:var(--yellow-soft);color:var(--ink);padding:3px 10px;border-radius:999px;cursor:pointer}
+.tagchip .n{font-family:var(--mono);font-size:.72rem;opacity:.6;margin-left:4px}
+.tagchip[aria-pressed="true"]{background:var(--yellow);font-weight:600}
+.tagchip:hover{background:var(--yellow)}
+.tagchip.sm{font-size:.74rem;padding:2px 8px}
+.labtags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
 .lab .inst{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .lab h3 a{color:var(--ink);text-decoration:none}
 .lab h3 a:hover{text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:3px;background:none}
@@ -256,8 +263,9 @@ html{scroll-behavior:smooth}
     <p class="note">Group leaders invited to the club, with short descriptions taken from lab and institute websites. UW covers the Faculties of Chemistry, Physics and Biology; WUM is the Medical University of Warsaw. If your lab is missing or the description is off, write to the organisers and we will fix it.</p>
     <div class="filters" role="group" aria-label="Filter by institute">
       <div id="chips" class="filters"></div>
-      <input id="lab-search" type="search" placeholder="Search PI or topic" aria-label="Search labs">
+      <input id="lab-search" type="search" placeholder="Search PI, lab or topic" aria-label="Search labs">
     </div>
+    <div id="tagbar" class="tagbar" role="group" aria-label="Filter by topic"></div>
     <div id="labs-grid" class="labs"></div>
     <p id="labs-empty" class="empty" hidden>No labs match this search.</p>
   </section>
@@ -430,9 +438,47 @@ const LABS = [
   {inst:"WUM", pi:"Dominika Nowis", lab:"Laboratory of Experimental Medicine", focus:"Translational medicine, including mRNA-based therapeutics.", url:"https://www.researchgate.net/lab/Dominika-Nowis-Lab"},
   {inst:"WUM", pi:"Jakub Gołąb", lab:"Department of Immunology", focus:"Tumour immunology and immunotherapy, including mRNA-based approaches.", url:"https://www.wum.edu.pl/en/niezwykla-czasteczka-mRNA-i-jej-mozliwe-zastosowania"}
 ];
+const TAGS = {
+  "Jacek Jemielity":["Chemistry","Therapeutics","Modifications"],
+  "Marcin Magnus":["Computation","Structure","Therapeutics"],
+  "Joanna Trylska":["Computation","Structure","Bacteria"],
+  "Maria Górna":["Structure","Immunity"],
+  "Katarzyna Bandyra":["Structure","RNA decay","Mitochondria"],
+  "Joanna Kowalska":["Chemistry","Therapeutics"],
+  "Paweł Sikorski":["Modifications","Therapeutics"],
+  "Joanna Kufel":["RNA decay","ncRNA"],
+  "Paweł Golik":["Mitochondria","RNA decay"],
+  "Andrzej Dziembowski":["RNA decay","Therapeutics","Immunity"],
+  "Gracjan Michlewski":["ncRNA","Immunity","Viruses"],
+  "Stefan Bresson":["Viruses","RNA decay"],
+  "Janusz Bujnicki":["Computation","Structure","Modifications"],
+  "Ewelina Małecka":["Bacteria","ncRNA","Structure"],
+  "Marcin Nowotny":["Structure"],
+  "Wojciech Galej":["Structure","Splicing"],
+  "Krzysztof Skowronek":["Core facility","Structure"],
+  "Tomasz Turowski":["Transcription"],
+  "Roman Szczęsny":["Mitochondria","RNA decay"],
+  "Agnieszka Tudek":["RNA decay","Splicing"],
+  "Agata Starosta":["Translation","Bacteria"],
+  "Szymon Świeżewski":["ncRNA","Transcription","Plants"],
+  "Jacek K. Nowak":["ncRNA","Transcription"],
+  "Tomasz Włodarski":["Translation","Computation"],
+  "Magda Konarska":["Splicing"],
+  "Maciej Cieśla":["Modifications","Splicing"],
+  "Piotr Gerlach":["Viruses","Translation","Structure"],
+  "Eugene Baulin":["Computation","Structure"],
+  "Aleksandra Pękowska":["Chromatin"],
+  "Paweł Mikulski":["Chromatin","Immunity"],
+  "Grzegorz Sumara":["Metabolism"],
+  "Dominika Nowis":["Therapeutics"],
+  "Jakub Gołąb":["Therapeutics","Immunity"]
+};
+LABS.forEach(l=>{ l.tags = TAGS[l.pi]||[]; });
+const TAG_LIST = [...new Set(LABS.flatMap(l=>l.tags))].sort((a,b)=>LABS.filter(l=>l.tags.includes(b)).length-LABS.filter(l=>l.tags.includes(a)).length||a.localeCompare(b));
+let activeTag = null;
 const ORDER = ["All","CeNT UW","IIMCB","IBB PAS","IMol PAS","UW","Nencki","WUM"];
 let active = "All", q = "";
-const chips = document.getElementById("chips"), grid = document.getElementById("labs-grid"),
+const tagbar = document.getElementById("tagbar"), chips = document.getElementById("chips"), grid = document.getElementById("labs-grid"),
       empty = document.getElementById("labs-empty"), search = document.getElementById("lab-search");
 function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function renderChips(){
@@ -441,19 +487,28 @@ function renderChips(){
     return `<button type="button" class="chip" data-k="${esc(k)}" aria-pressed="${k===active}">${esc(k)}<span class="n">${n}</span></button>`;
   }).join("");
 }
+function renderTags(){
+  tagbar.innerHTML = TAG_LIST.map(t=>`<button type="button" class="tagchip" data-t="${esc(t)}" aria-pressed="${t===activeTag}">${esc(t)}<span class="n">${LABS.filter(l=>l.tags.includes(t)).length}</span></button>`).join("");
+}
 function renderLabs(){
   const t = q.trim().toLowerCase();
-  const list = LABS.filter(l => (active==="All"||l.inst===active) &&
-    (!t || (l.pi+" "+l.lab+" "+l.focus+" "+l.inst).toLowerCase().includes(t)));
-  grid.innerHTML = list.map(l=>`<article class="lab"><span class="inst">${esc(l.inst)}</span><h3><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.lab)}</a></h3><span class="pi">${esc(l.pi)}</span><p>${esc(l.focus)}</p></article>`).join("");
+  const list = LABS.filter(l => (active==="All"||l.inst===active) && (!activeTag||l.tags.includes(activeTag)) &&
+    (!t || (l.pi+" "+l.lab+" "+l.focus+" "+l.inst+" "+l.tags.join(" ")).toLowerCase().includes(t)));
+  grid.innerHTML = list.map(l=>`<article class="lab"><span class="inst">${esc(l.inst)}</span><h3><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.lab)}</a></h3><span class="pi">${esc(l.pi)}</span><p>${esc(l.focus)}</p><div class="labtags">${l.tags.map(x=>`<button type="button" class="tagchip sm" data-t="${esc(x)}" aria-pressed="${x===activeTag}">${esc(x)}</button>`).join("")}</div></article>`).join("");
   empty.hidden = list.length>0;
+}
+function toggleTag(e){
+  const b = e.target.closest(".tagchip"); if(!b) return;
+  activeTag = activeTag===b.dataset.t ? null : b.dataset.t; renderTags(); renderLabs();
 }
 chips.addEventListener("click", e=>{
   const b = e.target.closest(".chip"); if(!b) return;
   active = b.dataset.k; renderChips(); renderLabs();
 });
 search.addEventListener("input", ()=>{ q = search.value; renderLabs(); });
-renderChips(); renderLabs();
+tagbar.addEventListener("click", toggleTag);
+grid.addEventListener("click", toggleTag);
+renderChips(); renderTags(); renderLabs();
 
 document.querySelectorAll(".copy").forEach(btn=>btn.addEventListener("click",()=>{
   const el = document.getElementById(btn.dataset.copy);
