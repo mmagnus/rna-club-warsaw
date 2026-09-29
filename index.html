@@ -488,7 +488,10 @@ function renderChips(){
   }).join("");
 }
 function renderTags(){
-  tagbar.innerHTML = TAG_LIST.map(t=>`<button type="button" class="tagchip" data-t="${esc(t)}" aria-pressed="${t===activeTag}">${esc(t)}<span class="n">${LABS.filter(l=>l.tags.includes(t)).length}</span></button>`).join("");
+  const scope = LABS.filter(l=>active==="All"||l.inst===active);
+  const avail = TAG_LIST.filter(t=>scope.some(l=>l.tags.includes(t)));
+  if(activeTag && !avail.includes(activeTag)) activeTag = null;
+  tagbar.innerHTML = avail.map(t=>`<button type="button" class="tagchip" data-t="${esc(t)}" aria-pressed="${t===activeTag}">${esc(t)}<span class="n">${scope.filter(l=>l.tags.includes(t)).length}</span></button>`).join("");
 }
 function renderLabs(){
   const t = q.trim().toLowerCase();
@@ -503,7 +506,7 @@ function toggleTag(e){
 }
 chips.addEventListener("click", e=>{
   const b = e.target.closest(".chip"); if(!b) return;
-  active = b.dataset.k; renderChips(); renderLabs();
+  active = b.dataset.k; renderChips(); renderTags(); renderLabs();
 });
 search.addEventListener("input", ()=>{ q = search.value; renderLabs(); });
 tagbar.addEventListener("click", toggleTag);
