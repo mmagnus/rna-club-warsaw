@@ -117,6 +117,10 @@ td.d{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
 .ch .role{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .addr{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .addr code{font-family:var(--mono);font-size:.85rem;background:var(--accent-soft);padding:3px 8px;border-radius:6px;word-break:break-all;user-select:all}
+.steps{margin:0;padding-left:1.3em;display:grid;gap:6px}
+.steps li{padding-left:2px}
+.ch .steps code{font-family:var(--mono);font-size:.8rem;background:var(--accent-soft);padding:1px 6px;border-radius:5px;overflow-wrap:anywhere}
+@media (min-width:760px){.channels:has(.ch-wide){grid-template-columns:1.6fr 1fr}.ch-wide{grid-row:span 3}}
 .copy{font:inherit;font-size:.8rem;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:6px;padding:3px 8px;cursor:pointer}
 
 .people{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
@@ -349,15 +353,15 @@ html{scroll-behavior:smooth}
     <h2 id="join-h">How to stay in touch</h2>
     <p class="note">Email is the official channel: every meeting is announced on the mailing list. The other channels are for informal chat, sharing papers and asking around for reagents. When you join the list, please give your full name, lab and institute.</p>
     <div class="channels">
-      <div class="ch">
+      <div class="ch ch-wide">
         <span class="role">Official · announcements</span>
         <h3>Mailing list</h3>
         <div class="addr"><code id="ml">rna-club-warsaw@googlegroups.com</code></div>
-        <p class="note">Google Group. To join, either:</p>
-        <ul class="checklist note">
-          <li>send an empty email to <code>rna-club-warsaw+subscribe@googlegroups.com</code> and confirm, or</li>
-          <li>open <a href="https://groups.google.com/g/rna-club-warsaw" target="_blank" rel="noopener">the group page</a>, sign in with a Google account and click <b>Ask to join group</b>.</li>
-        </ul>
+        <p class="note">A Google Group. Two ways to join:</p>
+        <ol class="steps note">
+          <li><b>By email:</b> send an empty message to <code>rna-club-warsaw+subscribe<wbr>@googlegroups.com</code> and confirm the reply.</li>
+          <li><b>Online:</b> open <a href="https://groups.google.com/g/rna-club-warsaw" target="_blank" rel="noopener">the group page</a>, sign in with a Google account and click <b>Ask to join group</b>.</li>
+        </ol>
         <p class="note">The organisers approve each request, so please use your full name and mention your lab.</p>
       </div>
       <div class="ch">
