@@ -104,6 +104,9 @@ td.d{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
 .tagchip[aria-pressed="true"]{background:var(--yellow);font-weight:600}
 .tagchip:hover{background:var(--yellow)}
 .tagchip.sm{font-size:.74rem;padding:2px 8px}
+.techs{display:flex;flex-wrap:wrap;gap:4px;border-top:1px dashed var(--line);padding-top:8px;margin-top:2px}
+.tech{font:inherit;font-size:.74rem;border:1px solid #9CC3E6;background:#EEF5FC;color:#17406A;padding:2px 8px;border-radius:999px;cursor:pointer}
+.tech:hover{background:#D6E8F8}
 .labtags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
 .lab .cf{background:var(--yellow);color:var(--ink);padding:1px 6px;border-radius:4px}
 .lab .inst{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
@@ -269,7 +272,7 @@ html{scroll-behavior:smooth}
   <section id="labs" aria-labelledby="labs-h">
     <p class="eyebrow">Laboratories</p>
     <h2 id="labs-h">RNA labs around the campus</h2>
-    <p class="note">Group leaders invited to the club, with short descriptions taken from lab and institute websites. UW covers the Faculties of Chemistry, Physics and Biology; WUM is the Medical University of Warsaw. If your lab is missing or the description is off, write to the organisers and we will fix it. Core facilities are listed too, marked “Core facility”, but are not included in the lab counts.</p>
+    <p class="note">Group leaders invited to the club, with short descriptions taken from lab and institute websites. UW covers the Faculties of Chemistry, Physics and Biology; WUM is the Medical University of Warsaw. If your lab is missing or the description is off, write to the organisers and we will fix it. Core facilities are listed too, marked “Core facility”, but are not included in the lab counts. <span style="background:var(--yellow-soft);border:1px solid var(--yellow);border-radius:999px;padding:0 8px">Yellow</span> labels are research topics; <span style="background:#EEF5FC;border:1px solid #9CC3E6;color:#17406A;border-radius:999px;padding:0 8px">blue</span> labels are techniques and resources from the labs’ flash-talk slides. Click a blue label to find other labs using it.</p>
     <div class="filters" role="group" aria-label="Filter by institute">
       <div id="chips" class="filters"></div>
       <input id="lab-search" type="search" placeholder="Search PI, lab or topic" aria-label="Search labs">
@@ -498,7 +501,8 @@ const TAGS = {
 };
 TAGS["Dorota Adamska (head) · gcf@cent.uw.edu.pl"]=["Core facility"];
 TAGS["Tomasz Góral (head) · t.goral@cent.uw.edu.pl"]=["Core facility","Structure"];
-LABS.forEach(l=>{ l.tags = TAGS[l.pi]||[]; });
+const TECH = {"Paweł Golik": ["Yeast genetics", "CRISPR", "Nanopore sequencing", "Mitochondrial transcriptomics", "Comparative genomics", "Respiration assays"], "Marcin Magnus": ["Deep learning", "RNA 3D structure prediction", "Covariation analysis", "SELEX library design", "SHAPE-MaP", "mRNA design"], "Janusz Bujnicki": ["RNA 3D modelling", "SimRNA", "MODOMICS", "Integrative modelling (cryo-EM, SHAPE)", "RNA–small molecule design", "RNA design"], "Andrzej Dziembowski": ["Nanopore direct RNA-seq", "Transgenic mice", "mRNA synthesis", "LNP formulation", "Machine learning"], "Maria Górna": ["Cryo-EM", "X-ray crystallography", "SAXS", "BLI", "MST", "Co-IP/MS", "RNA pulldown"], "Katarzyna Bandyra": ["Cryo-EM", "microED", "MST", "BLI", "Fluorescence polarisation", "Crystallisation robots", "In vitro transcription", "RNA degradation assays"], "Agata Starosta": ["Ribosome profiling", "Toe-printing", "Click chemistry", "Sucrose gradients", "NGS analysis"], "Eugene Baulin": ["RNA 2D/3D structure analysis", "Sequence alignment", "RNA interaction annotation", "Algorithm development"], "Maciej Cieśla": ["hESC", "Mouse HSC", "C. elegans", "CRISPR knock-in", "Polysome profiling", "Reporter assays", "Splicing analysis"], "Tomasz Włodarski": ["Molecular dynamics", "Coarse-grained MD", "Cryo-EM ensemble modelling"], "Szymon Świeżewski": ["Transcription kinetics", "ncRNA analysis", "Plant phenotyping"], "Paweł Sikorski": ["Synthetic dsRNA", "Modified RNA", "Avian cell models", "CRISPR knockouts", "Innate immune assays"], "Jakub Gołąb": ["Mouse models", "Syngeneic tumour models", "IVIS imaging", "mRNA-LNP", "Reactogenicity assays"], "Dominika Nowis": ["Flow cytometry", "Immune cell sorting", "CAR-T", "Lentiviral transduction"], "Daniel Ryan": ["RNA-seq", "Anaerobic microbiology", "Hypoxic models", "RNA structure probing", "Northern blotting", "Reporter assays", "Phenotyping"], "Piotr Gerlach": ["Mini-replicon reporters", "Insect cell expression", "Cryo-EM sample prep", "RNA–protein binding assays"], "Adam Kłosin": ["C. elegans transgenics", "Live microscopy (vt-iSIM)", "Condensate biology"], "Joanna Sulkowska": ["Knot detection", "AI modelling", "X-ray crystallography", "Molecular dynamics", "Protein production", "In vitro transcription"], "Jacek K. Nowak": ["Paramecium", "Small RNA biology"], "Dorota Adamska (head) · gcf@cent.uw.edu.pl": ["Illumina sequencing", "Nanopore sequencing", "Single-cell RNA-seq", "Spatial transcriptomics", "Bioinformatics"], "Tomasz Góral (head) · t.goral@cent.uw.edu.pl": ["Cryo-EM", "microED", "Confocal microscopy"]};
+LABS.forEach(l=>{ l.tags = TAGS[l.pi]||[]; l.tech = TECH[l.pi]||[]; });
 const TAG_LIST = [...new Set(LABS.flatMap(l=>l.tags))].sort((a,b)=>LABS.filter(l=>l.tags.includes(b)).length-LABS.filter(l=>l.tags.includes(a)).length||a.localeCompare(b));
 let activeTag = null;
 const ORDER = ["All","CeNT UW","IIMCB","IBB PAS","IMol PAS","UW","Nencki","WUM"];
@@ -521,8 +525,8 @@ function renderTags(){
 function renderLabs(){
   const t = q.trim().toLowerCase();
   const list = LABS.filter(l => (active==="All"||l.inst===active) && (!activeTag||l.tags.includes(activeTag)) &&
-    (!t || (l.pi+" "+l.lab+" "+l.focus+" "+l.inst+" "+l.tags.join(" ")).toLowerCase().includes(t)));
-  grid.innerHTML = list.map(l=>`<article class="lab"><span class="inst">${esc(l.inst)}${l.core?' · <span class="cf">Core facility</span>':''}</span><h3><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.lab)}</a></h3><span class="pi">${esc(l.pi)}</span><p>${esc(l.focus)}</p><div class="labtags">${l.tags.map(x=>`<button type="button" class="tagchip sm" data-t="${esc(x)}" aria-pressed="${x===activeTag}">${esc(x)}</button>`).join("")}</div></article>`).join("");
+    (!t || (l.pi+" "+l.lab+" "+l.focus+" "+l.inst+" "+l.tags.join(" ")+" "+l.tech.join(" ")).toLowerCase().includes(t)));
+  grid.innerHTML = list.map(l=>`<article class="lab"><span class="inst">${esc(l.inst)}${l.core?' · <span class="cf">Core facility</span>':''}</span><h3><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.lab)}</a></h3><span class="pi">${esc(l.pi)}</span><p>${esc(l.focus)}</p><div class="labtags">${l.tags.map(x=>`<button type="button" class="tagchip sm" data-t="${esc(x)}" aria-pressed="${x===activeTag}">${esc(x)}</button>`).join("")}</div>${l.tech.length?`<div class="techs">${l.tech.map(x=>`<button type="button" class="tech" data-q="${esc(x)}" title="Show labs with ${esc(x)}">${esc(x)}</button>`).join("")}</div>`:""}</article>`).join("");
   empty.hidden = list.length>0;
 }
 function toggleTag(e){
@@ -536,6 +540,7 @@ chips.addEventListener("click", e=>{
 search.addEventListener("input", ()=>{ q = search.value; renderLabs(); });
 tagbar.addEventListener("click", toggleTag);
 grid.addEventListener("click", toggleTag);
+grid.addEventListener("click", e=>{ const b=e.target.closest(".tech"); if(!b) return; search.value=b.dataset.q; q=b.dataset.q; renderLabs(); search.scrollIntoView({block:"center",behavior:"smooth"}); });
 renderChips(); renderTags(); renderLabs();
 
 document.querySelectorAll(".copy").forEach(btn=>btn.addEventListener("click",()=>{
