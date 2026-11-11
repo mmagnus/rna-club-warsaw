@@ -105,6 +105,7 @@ td.d{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
 .tagchip:hover{background:var(--yellow)}
 .tagchip.sm{font-size:.74rem;padding:2px 8px}
 .labtags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.lab .cf{background:var(--yellow);color:var(--ink);padding:1px 6px;border-radius:4px}
 .lab .inst{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .lab h3 a{color:var(--ink);text-decoration:none}
 .lab h3 a:hover{text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:3px;background:none}
@@ -268,7 +269,7 @@ html{scroll-behavior:smooth}
   <section id="labs" aria-labelledby="labs-h">
     <p class="eyebrow">Laboratories</p>
     <h2 id="labs-h">RNA labs around the campus</h2>
-    <p class="note">Group leaders invited to the club, with short descriptions taken from lab and institute websites. UW covers the Faculties of Chemistry, Physics and Biology; WUM is the Medical University of Warsaw. If your lab is missing or the description is off, write to the organisers and we will fix it.</p>
+    <p class="note">Group leaders invited to the club, with short descriptions taken from lab and institute websites. UW covers the Faculties of Chemistry, Physics and Biology; WUM is the Medical University of Warsaw. If your lab is missing or the description is off, write to the organisers and we will fix it. Core facilities are listed too, marked “Core facility”, but are not included in the lab counts.</p>
     <div class="filters" role="group" aria-label="Filter by institute">
       <div id="chips" class="filters"></div>
       <input id="lab-search" type="search" placeholder="Search PI, lab or topic" aria-label="Search labs">
@@ -422,6 +423,8 @@ const LABS = [
   {inst:"CeNT UW", pi:"Marcin Magnus", lab:"Laboratory of RNA Design and Therapeutics", focus:"RNA design, deep learning for RNA 3D structure prediction and RNA–small molecule interactions.", url:"https://cent.uw.edu.pl/laboratory-of-rna-design-and-therapeutics/"},
   {inst:"CeNT UW", pi:"Joanna Trylska", lab:"Biomolecular Machines Laboratory", focus:"Molecular simulations of RNA and ribosomes; oligonucleotide and PNA-based antibacterials.", url:"https://cent.uw.edu.pl/en/biomolecular-machines-laboratory/"},
   {inst:"CeNT UW", pi:"Joanna Sulkowska", lab:"Interdisciplinary Laboratory of Biological Systems Modelling", focus:"Knots and entanglements in RNA and proteins: detecting knotted topologies in RNA 3D structures, including knotted artifacts in predicted models.", url:"https://jsulkowska.cent.uw.edu.pl/"},
+  {inst:"CeNT UW", core:true, pi:"Dorota Adamska (head) · gcf@cent.uw.edu.pl", lab:"Genomics Core Facility", focus:"Illumina NovaSeq 6000 and MiSeq, Oxford Nanopore MinION, Bioanalyzer/TapeStation, Covaris. Bulk, single-cell and spatial transcriptomics, RNA–DNA–protein interactions, epigenetics, (meta)genomes and amplicons; library prep, experiment design and bioinformatic analysis.", url:"https://cent.uw.edu.pl/service-providers/"},
+  {inst:"CeNT UW", core:true, pi:"Tomasz Góral (head) · t.goral@cent.uw.edu.pl", lab:"Cryo-EM Core Facility", focus:"200 kV Glacios (Falcon 3EC, Ceta-D), 2 Vitrobots. Single-particle analysis of proteins, complexes and nucleic acids; microED of nanocrystals; imaging of liposomes, EVs and amyloids; help with data processing. Also runs Biological Imaging (confocal and fluorescence microscopes).", url:"https://cent.uw.edu.pl/cryomicroscopy-and-electron-diffraction-core-facility/"},
   {inst:"UW", pi:"Maria Górna", lab:"Go!RNA Structural Biology Group · Faculty of Chemistry", focus:"Structural biology (cryo-EM, crystallography) of RNA-binding proteins in RNA metabolism and innate immunity.", url:"https://gorna.uw.edu.pl/en"},
   {inst:"UW", pi:"Katarzyna Bandyra", lab:"Bandyra Group · Faculty of Chemistry", focus:"RNA decay enzymes, including human PNPase in mitochondrial RNA metabolism.", url:"https://en.uw.edu.pl/dr-katarzyna-bandyra-awarded-the-embo-installation-grant/"},
   {inst:"UW", pi:"Joanna Kowalska", lab:"Division of Biophysics · Faculty of Physics", focus:"Chemistry of mRNA 5′ caps and nucleotide analogues for mRNA therapeutics.", url:"http://www.biogeo.uw.edu.pl/people/joannakowalska_en.html"},
@@ -435,7 +438,7 @@ const LABS = [
   {inst:"IIMCB", pi:"Ewelina Małecka", lab:"Laboratory of Prokaryotic Gene Regulation", focus:"Bacterial small regulatory RNAs, the Hfq chaperone, and how phages reprogram bacterial RNA metabolism.", url:"https://www.iimcb.gov.pl/en/research-iimcb/laboratory-of-single-molecule-biophysics"},
   {inst:"IIMCB", pi:"Marcin Nowotny", lab:"Laboratory of Protein Structure", focus:"Structural biology of enzymes that process nucleic acids.", url:"https://www.iimcb.gov.pl/en/nowotny-lab"},
   {inst:"IIMCB", pi:"Wojciech Galej", lab:"RNA structural biology", focus:"Cryo-EM of the spliceosome, including the minor spliceosome.", url:"https://www.iimcb.gov.pl/en/news-press-office/wojciech-galej-elected-embo-member"},
-  {inst:"IIMCB", pi:"Krzysztof Skowronek", lab:"Biophysics and Bioanalytics Facility", focus:"Core facility for biophysical characterisation of proteins and nucleic acids.", url:"https://core-facility.iimcb.gov.pl/krzysztof-skowronek/"},
+  {inst:"IIMCB", core:true, pi:"Krzysztof Skowronek", lab:"Biophysics and Bioanalytics Facility", focus:"Core facility for biophysical characterisation of proteins and nucleic acids.", url:"https://core-facility.iimcb.gov.pl/krzysztof-skowronek/"},
   {inst:"IBB PAS", pi:"Tomasz Turowski", lab:"Laboratory of Transcription Mechanisms", focus:"Biophysics of transcription and gene regulation, RNA polymerase III, synthetic genome design.", url:"https://ibb.edu.pl/en/laboratory/dr-tomasz-turowski/"},
   {inst:"IBB PAS", pi:"Roman Szczęsny", lab:"Laboratory of RNA Biology", focus:"Quality control, quantity and processing of RNA in human mitochondria and the nucleus.", url:"https://ibb.edu.pl/en/laboratory/roman-szczesny/"},
   {inst:"IBB PAS", pi:"Agnieszka Tudek", lab:"Laboratory of RNA Processing and Decay", focus:"Poly(A)-tail control of nuclear and cytoplasmic mRNA decay; splicing regulation, in yeast and human cells.", url:"https://ibb.edu.pl/en/laboratory/dr-agnieszka-tudek/"},
@@ -493,6 +496,8 @@ const TAGS = {
   "Dominika Nowis":["Therapeutics"],
   "Jakub Gołąb":["Therapeutics","Immunity"]
 };
+TAGS["Dorota Adamska (head) · gcf@cent.uw.edu.pl"]=["Core facility"];
+TAGS["Tomasz Góral (head) · t.goral@cent.uw.edu.pl"]=["Core facility","Structure"];
 LABS.forEach(l=>{ l.tags = TAGS[l.pi]||[]; });
 const TAG_LIST = [...new Set(LABS.flatMap(l=>l.tags))].sort((a,b)=>LABS.filter(l=>l.tags.includes(b)).length-LABS.filter(l=>l.tags.includes(a)).length||a.localeCompare(b));
 let activeTag = null;
@@ -503,7 +508,7 @@ const tagbar = document.getElementById("tagbar"), chips = document.getElementByI
 function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function renderChips(){
   chips.innerHTML = ORDER.map(k=>{
-    const n = k==="All"?LABS.length:LABS.filter(l=>l.inst===k).length;
+    const n = LABS.filter(l=>!l.core && (k==="All"||l.inst===k)).length;
     return `<button type="button" class="chip" data-k="${esc(k)}" aria-pressed="${k===active}">${esc(k)}<span class="n">${n}</span></button>`;
   }).join("");
 }
@@ -517,7 +522,7 @@ function renderLabs(){
   const t = q.trim().toLowerCase();
   const list = LABS.filter(l => (active==="All"||l.inst===active) && (!activeTag||l.tags.includes(activeTag)) &&
     (!t || (l.pi+" "+l.lab+" "+l.focus+" "+l.inst+" "+l.tags.join(" ")).toLowerCase().includes(t)));
-  grid.innerHTML = list.map(l=>`<article class="lab"><span class="inst">${esc(l.inst)}</span><h3><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.lab)}</a></h3><span class="pi">${esc(l.pi)}</span><p>${esc(l.focus)}</p><div class="labtags">${l.tags.map(x=>`<button type="button" class="tagchip sm" data-t="${esc(x)}" aria-pressed="${x===activeTag}">${esc(x)}</button>`).join("")}</div></article>`).join("");
+  grid.innerHTML = list.map(l=>`<article class="lab"><span class="inst">${esc(l.inst)}${l.core?' · <span class="cf">Core facility</span>':''}</span><h3><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.lab)}</a></h3><span class="pi">${esc(l.pi)}</span><p>${esc(l.focus)}</p><div class="labtags">${l.tags.map(x=>`<button type="button" class="tagchip sm" data-t="${esc(x)}" aria-pressed="${x===activeTag}">${esc(x)}</button>`).join("")}</div></article>`).join("");
   empty.hidden = list.length>0;
 }
 function toggleTag(e){
